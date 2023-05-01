@@ -16,20 +16,18 @@ if __name__ == '__main__':
     with open(path, 'r', encoding='u8') as f:
         data = pandas.read_csv(f, header=0)
 
-    date_dict = {
-        2019: {},
-        2020: {},
-        2021: {},
-        2022: {}
-    }
+    pass
 
-    for row in data[data.country == 'China'][data.sector == 'Total'].itertuples():
+    data_dict = {}
+    for country in data.country.unique():
+        data_dict[country] = {}
+
+    for row in data[data.sector == 'Total'].itertuples():
         date = datetime.datetime.strptime(row.date, '%Y-%m-%d')
-        if date.year in date_dict:
-            date_dict[date.year][date.month] = date_dict[date.year].get(date.month, 0.0) + row.co2
+        data_dict[row.country][date.year] = data_dict[row.country].get(date.year, 0.0) + row.co2
 
     insert = []
-    for year, month_dict in date_dict.items():
-        for month, value in month_dict.items():
-            insert.append(carbon_monitor(year=year, month=month, value=value))
+    for country, value in data_dict.items():
+        for year, co2 in value.items():
+            insert.append(global_carbon(country=country, year=year, value=co2))
     db.inserts(insert)

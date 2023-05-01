@@ -313,6 +313,13 @@ class carbon_monitor(Base):
     def __repr__(self):
         return f'<carbon_monitor(year={self.year}, month={self.month}, value={self.value})>'
 
+class global_carbon(Base):
+    __tablename__ = 'global_carbon'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    country = Column(String(255), comment='国家')
+    year = Column(Integer, comment='年份')
+    value = Column(Float, comment='二氧化碳排放量')
+
 if __name__ == '__main__':
     db = Database('mysql+pymysql://root:20131114@localhost:3306/env?charset=utf8mb4')
     db.create_all_table()
