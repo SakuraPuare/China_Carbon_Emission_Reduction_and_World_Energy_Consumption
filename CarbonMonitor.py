@@ -2,7 +2,7 @@ import pathlib
 
 import pandas
 
-from api.database import *
+from database import *
 
 path = pathlib.Path(
     r'C:\Users\SakuraPuare\Desktop\计算机设计大赛\中国的碳减排与世界能源消费\data\CarbonMonitor.csv')
@@ -15,11 +15,21 @@ if __name__ == '__main__':
     # open xlsx file
     with open(path, 'r', encoding='u8') as f:
         data = pandas.read_csv(f, header=0)
-    for row in data.itertuples():
-        insert = []
-        country, carbon_emission, types, date = row[1:]
-        year, month, day = date.split('-')
-        insert.append(carbon_monitor(country=country, year=year, month=month, day=day, carbon_emission=carbon_emission,
-                                     types=types))
-        db.inserts(insert)
-        pass
+
+    date_dict = {
+        2019: {},
+        2020: {},
+        2021: {},
+        2022: {}
+    }
+
+    for row in data[data.country == 'China'][data.sector == 'Total'].itertuples():
+        date = datetime.datetime.strptime(row.date, '%Y-%m-%d')
+        if date.year in date_dict:
+            date_dict[date.year][date.month] = date_dict[date.year].get(date.month, 0.0) + row.co2
+
+    insert = []
+    for year, month_dict in date_dict.items():
+        for month, value in month_dict.items():
+            insert.append(carbon_monitor(year=year, month=month, value=value))
+    db.inserts(insert)

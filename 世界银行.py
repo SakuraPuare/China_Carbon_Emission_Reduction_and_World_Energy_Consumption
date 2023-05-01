@@ -3,7 +3,7 @@ import pathlib
 
 import pandas
 
-from api.database import *
+from database import *
 
 path = pathlib.Path(
     r'C:\Users\SakuraPuare\Desktop\计算机设计大赛\中国的碳减排与世界能源消费\data\世界银行\二氧化碳强度（千克石油当量能源使用千克数）\API_EN.ATM.CO2E.EG.ZS_DS2_zh_csv_v2_5366911.csv')

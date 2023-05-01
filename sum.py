@@ -1,9 +1,8 @@
 import json
-
 import numpy
 from sqlalchemy import distinct
 
-from api.database import *
+from database import *
 
 
 def sum_province_emission() -> None:
@@ -57,6 +56,7 @@ def get_all_country():
                                                          global_county_emission.county_code).all()}
     with open('global_country.json', 'w', encoding='u8') as f:
         json.dump(country_dict, f, ensure_ascii=False)
+
 
 def get_all_country_list():
     country_list = [i[0] for i in db.session.query(distinct(global_county_emission.country)).all()]

@@ -2,7 +2,7 @@ import pathlib
 
 import pandas
 
-from api.database import *
+from database import *
 
 path = pathlib.Path(
     r'C:\Users\SakuraPuare\Desktop\计算机设计大赛\中国的碳减排与世界能源消费\data\1997-2017年中国县级尺度碳排放.CSV')
