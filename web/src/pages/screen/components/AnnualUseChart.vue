@@ -98,7 +98,7 @@ const initChart = (data: any = {}): ECharts => {
       }
     ],
     yAxis: {
-      name: "(人数)",
+      name: "(吨)",
       nameTextStyle: {
         color: "#D6DFEA",
         fontSize: 12,

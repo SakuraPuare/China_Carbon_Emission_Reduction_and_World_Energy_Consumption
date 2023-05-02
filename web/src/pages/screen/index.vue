@@ -31,7 +31,7 @@
           </div>
           <div class="dataScreen-center">
             <div class="dataScreen-main-title">
-              <span>全球碳排放量TOP10</span>
+              <span>全球碳排放量Top10</span>
               <img src="@/images/dataScreen-title.png" alt="" />
             </div>
             <!-- chart区域 -->
@@ -41,7 +41,7 @@
           </div>
           <div class="dataScreen-bottom">
             <div class="dataScreen-main-title">
-              <span>全球发电装机容量占比</span>
+              <span>中国发电装机容量占比</span>
               <img src="@/images/dataScreen-title.png" alt="" />
             </div>
             <!-- chart区域 -->
